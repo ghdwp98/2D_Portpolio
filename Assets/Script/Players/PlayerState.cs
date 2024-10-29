@@ -21,6 +21,11 @@ public class PlayerState
         this.animBoolName = animBoolName;
     }
 
+    public PlayerState()
+    {
+        
+    }
+
     public virtual void Enter()
     {
         // 진입 시 true / false 구분이 필요한 애니메이션인 경우 이용 
@@ -39,14 +44,16 @@ public class PlayerState
     {
 
     }
+
+    public virtual void FixedUpdate()
+    {
+
+    }
     public virtual void Exit()
     {
         if (animBoolName != null)
         {
             player.Anim.SetBool(animBoolName, false); // 생성자에서 이미 할당됨. 
-
         }
     }
-
-    
 }

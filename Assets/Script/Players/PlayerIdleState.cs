@@ -15,6 +15,7 @@ public class PlayerIdleState : PlayerState
     public override void Enter()
     {
         base.Enter();
+        Debug.Log("Idle State ¡¯¿‘");
     }
 
     public override void Exit()
@@ -25,11 +26,16 @@ public class PlayerIdleState : PlayerState
     public override void Update()
     {
         base.Update();
-
         if (input.MoveDirection.x != 0)
         {
             stateMachine.ChangeState(player.moveState);
         }
+
+        if (input.IsJumping == true && player.IsGrounded == false)
+        {
+            stateMachine.ChangeState(player.jumpState);
+        }
+
     }
 
     public override void LateUpdate()

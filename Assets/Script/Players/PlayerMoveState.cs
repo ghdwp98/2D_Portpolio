@@ -15,6 +15,7 @@ public class PlayerMoveState : PlayerState
     public override void Enter()
     {
         base.Enter();
+        Debug.Log("Move State 진입");
     }
 
     public override void Exit()
@@ -25,17 +26,30 @@ public class PlayerMoveState : PlayerState
     public override void Update()
     {
         base.Update();
+        PlayerMove();
+
+        if (input.MoveDirection.x == 0)
+        {
+            stateMachine.ChangeState(player.idleState);
+        }
+
+        // 이동 중 점프 가능하도록 체크 
+        if (input.IsJumping == true && player.IsGrounded == false)
+        {
+            Debug.Log("Move -> Jump");
+            stateMachine.ChangeState(player.jumpState);
+        }
+
+    }
+
+    public override void FixedUpdate()
+    {
+        base.FixedUpdate();
     }
 
     public override void LateUpdate()
     {
         base.LateUpdate();
-        PlayerMove();
-
-        if(input.MoveDirection.x==0)
-        {
-            stateMachine.ChangeState(player.idleState);
-        }
 
     }
 

@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 109217689}
   - component: {fileID: 109217688}
   - component: {fileID: 109217691}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: GroundTile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1357,6 +1357,38 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3258743648414616896, guid: 31edf633324956d4a8d55045bd085e16, type: 3}
+      propertyPath: actions
+      value: 
+      objectReference: {fileID: -944628639613478452, guid: 38ae963ee8a33334f940c30925080e2c, type: 3}
+    - target: {fileID: 3258743648414616896, guid: 31edf633324956d4a8d55045bd085e16, type: 3}
+      propertyPath: jumpForce
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3258743648414616896, guid: 31edf633324956d4a8d55045bd085e16, type: 3}
+      propertyPath: moveSpeed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3258743648414616896, guid: 31edf633324956d4a8d55045bd085e16, type: 3}
+      propertyPath: actionAsset
+      value: 
+      objectReference: {fileID: -944628639613478452, guid: 38ae963ee8a33334f940c30925080e2c, type: 3}
+    - target: {fileID: 3258743648414616896, guid: 31edf633324956d4a8d55045bd085e16, type: 3}
+      propertyPath: actionsAsset
+      value: 
+      objectReference: {fileID: -944628639613478452, guid: 38ae963ee8a33334f940c30925080e2c, type: 3}
+    - target: {fileID: 3258743648414616896, guid: 31edf633324956d4a8d55045bd085e16, type: 3}
+      propertyPath: action.m_Name
+      value: Action
+      objectReference: {fileID: 0}
+    - target: {fileID: 3258743648414616896, guid: 31edf633324956d4a8d55045bd085e16, type: 3}
+      propertyPath: fallAction.m_Name
+      value: Fall
+      objectReference: {fileID: 0}
+    - target: {fileID: 3258743648414616896, guid: 31edf633324956d4a8d55045bd085e16, type: 3}
+      propertyPath: inputAction.m_Name
+      value: Input
+      objectReference: {fileID: 0}
     - target: {fileID: 4908611965245510144, guid: 31edf633324956d4a8d55045bd085e16, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.73191255

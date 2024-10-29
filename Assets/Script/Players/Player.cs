@@ -5,12 +5,13 @@ using UnityEngine;
 // 플레이어 클래스 
 public class Player : MonoBehaviour
 {
-    public PlayerInput PlayerInput {get; private set; }
+    public PlayerInput Input {get; private set; }
     public PlayerStateMachine stateMachine { get; private set; }
     public PlayerIdleState idleState { get; private set; }
     public PlayerMoveState moveState { get; private set; }
     public PlayerJumpState jumpState { get; private set; }
     public PlayerGroundedState groundedState { get; private set; }
+
 
     #region 조건처리 
     [SerializeField] private bool isGrounded = false;
@@ -36,10 +37,13 @@ public class Player : MonoBehaviour
     private void Awake()
     {
         stateMachine = new PlayerStateMachine();
-        PlayerInput = GetComponent<PlayerInput>();        
-        idleState = new PlayerIdleState(PlayerInput , this , stateMachine , "Idle");
-        moveState = new PlayerMoveState(PlayerInput, this, stateMachine, "Move");
-        groundCheckDistance = 1f;
+        Input = GetComponent<PlayerInput>();        
+        idleState = new PlayerIdleState(Input , this , stateMachine , "Idle");
+        moveState = new PlayerMoveState(Input, this, stateMachine, "Move");
+        jumpState = new PlayerJumpState(Input, this, stateMachine, "Jump");
+        groundedState = new PlayerGroundedState(Input, this, stateMachine, "Idle"); // Idle 에서 상태전이 시작 
+
+        groundCheckDistance = 1.05f;
     }
 
     private void Start()
@@ -53,8 +57,13 @@ public class Player : MonoBehaviour
     {
         stateMachine.currentState.Update(); // 현재 상태머신의 업데이트 진행 
         // Player의 GroundCheck는 최상단에서 실시. 
+    }
 
-        isGrounded = GroundCheck();
+    private void FixedUpdate()
+    {
+        stateMachine.currentState.FixedUpdate();
+
+        GroundCheck();
     }
 
     private void LateUpdate()
@@ -77,8 +86,6 @@ public class Player : MonoBehaviour
             isGrounded = false;
             return isGrounded;
         }
-
-
     }
 
 }
