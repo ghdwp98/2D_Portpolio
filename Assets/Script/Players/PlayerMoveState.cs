@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 // 플레이어가 이동 중일때의 구체적인 동작을 정희한다. 
-public class PlayerMoveState : PlayerState
+public class PlayerMoveState : PlayerGroundedState
 {
 
     public PlayerMoveState(PlayerInput input, Player player, PlayerStateMachine stateMachine, string animBoolName)
@@ -32,14 +32,6 @@ public class PlayerMoveState : PlayerState
         {
             stateMachine.ChangeState(player.idleState);
         }
-
-        // 이동 중 점프 가능하도록 체크 
-        if (input.IsJumping == true && player.IsGrounded == false)
-        {
-            Debug.Log("Move -> Jump");
-            stateMachine.ChangeState(player.jumpState);
-        }
-
     }
 
     public override void FixedUpdate()

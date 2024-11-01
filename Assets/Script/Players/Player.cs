@@ -63,7 +63,6 @@ public class Player : MonoBehaviour
         zattackState = new PlayerZattackState(Input, this, stateMachine,"Zattack1");
         fallState = new PlayerFallState(Input, this, stateMachine, "Fall");
         dashState = new PlayerDashState(Input, this, stateMachine, "Dash");
-
         groundCheckDistance = 1.05f;
     }
 
@@ -83,11 +82,8 @@ public class Player : MonoBehaviour
         if (attackCooldownTimer > 0)
         {
             attackCooldownTimer -= Time.deltaTime;
-            Debug.Log(CanAttack + "캔 어택 상태 ");
-            Debug.Log(attackCooldownTimer + "쿨다운 시간");
         }
 
-        
     }
 
     private void FixedUpdate()

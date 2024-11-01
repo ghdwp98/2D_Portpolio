@@ -17,7 +17,6 @@ public class PlayerGroundedState : PlayerState
     public override void Enter()
     {
         base.Enter();
-        Debug.Log("GroundStateÁøÀÔ");
     }
 
     public override void Exit()
@@ -38,6 +37,21 @@ public class PlayerGroundedState : PlayerState
             stateMachine.ChangeState(player.jumpState); 
         }
 */
+        if (input.actionsAsset["Dash"].triggered)
+        {
+            stateMachine.ChangeState(player.dashState);
+        }
+
+        if (input.actionsAsset["Zattack"].triggered && player.CanAttack)
+        {
+            stateMachine.ChangeState(player.zattackState);
+
+        }
+
+        if (input.IsJumping == true && player.IsGrounded == false)
+        {
+            stateMachine.ChangeState(player.jumpState);
+        }
 
     }
 }

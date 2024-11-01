@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class PlayerFallState : PlayerState
+public class PlayerFallState : PlayerAirState
 {
     public PlayerFallState(PlayerInput input, Player player, PlayerStateMachine stateMachine, string animBoolName)
         : base(input, player, stateMachine, animBoolName)

@@ -25,7 +25,7 @@ public class PlayerZattackState : PlayerState
         base.Enter();
         Debug.Log("Zattack 진입");
         comboAttackTimer = Timer;
-        comboAttackNumber = 0; // 콤보 숫자 초기화 
+        
     }
 
     public override void Exit()
@@ -33,6 +33,7 @@ public class PlayerZattackState : PlayerState
         base.Exit();
 
         // 3콤보까지 모두 끝낸 후에야 공격의 쿨타임이 돌도록. 1 / 2 번째 까지는 공격 쿨타임이 없다. 
+
         if(lastAttack)
         {
             player.StartAttackCooldown(); // 공격 쿨타임 시작
@@ -40,6 +41,7 @@ public class PlayerZattackState : PlayerState
         }
         triggerCalled = false; // 다시 False로 변경
         nextComboInput = false;
+        comboAttackNumber = 0; // 콤보 숫자 초기화 
 
     }
 

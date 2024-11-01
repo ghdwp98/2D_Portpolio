@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerJumpState : PlayerState
+public class PlayerJumpState : PlayerAirState
 {
     // 점프 키를 누르고 들어오는 점프상황. 
     // Ground State // Air State를 한 번 더 상속하는 방안도 생각필요. 

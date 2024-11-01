@@ -71,5 +71,9 @@ public class PlayerDashState : PlayerState
             stateMachine.ChangeState(player.idleState);          
         }
 
+        // 대시 중 어택 --> Idle의 Final 어택 이용 
+        // Final 콤보 숫자로 변경 필요 
+
+
     }
 }
