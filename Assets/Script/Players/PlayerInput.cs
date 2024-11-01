@@ -29,14 +29,17 @@ public class PlayerInput : MonoBehaviour
     [Tooltip("플레이어의 Fall 액션")]
     private InputAction fallAction;
 
-    
+    [Tooltip("플립의 전환을 불가능 하도록 만드는 변수")]
+    public bool canFlip { get; set; } = true;
 
+    #region Spec
+    [Header("플레이어의 Spec")]
     [Tooltip("아래 방향 키 누를 시 내려가는 움직임")]
     public float downForce = 5f;
 
     [Tooltip("아래 방향키 누르고 있는지 확인")]
     private bool isFallingPressed = false;
-
+    #endregion
     public bool IsFallingPressed { get { return isFallingPressed; } }
 
     #endregion
@@ -99,34 +102,30 @@ public class PlayerInput : MonoBehaviour
             IsJumping = true;
         }
     }
-
-    /*private void OnFall(InputValue value)
-    {
-        // 점프 중 하강하는 힘 가해주기.
-        if(player.stateMachine.currentState == player.jumpState)
-        {
-            Rb.AddForce(Vector2.down * downForce, ForceMode2D.Impulse);
-            Debug.Log($"하강 {downForce}");
-        }
-    }*/
-
-
-
     private void Update()
     {
-        if (moveDirection.x < 0)
-        {
-            player.Sprite.flipX = true;
-        }
-        else if (moveDirection.x > 0)
-        {
-            player.Sprite.flipX = false;
-        }
+        UpdatePlayer();
+    }
 
+    private void UpdatePlayer()
+    {
+        // 플립이 변경되어서는 안되는 상태들. 
+        // 1. 대시상태 2. 사망상태 3. 공격 중 
+        
+        if(canFlip)
+        {
+            if (moveDirection.x < 0)
+            {
+                player.Sprite.flipX = true;
+            }
+            else if (moveDirection.x > 0)
+            {
+                player.Sprite.flipX = false;
+            }
+        }
         // 점프 상태 체크 -> 땅에 닿은 경우 
         if (rb.velocity.y <= 0f && player.IsGrounded && IsJumping == true)
         {
-            Debug.Log("Input의 Jump 상태 체크");
             IsJumping = false;
         }
     }
@@ -152,6 +151,9 @@ public class PlayerInput : MonoBehaviour
         Debug.Log("OnFallEnd");
         isFallingPressed = false;
     }
+
+    
+
 
 
 }

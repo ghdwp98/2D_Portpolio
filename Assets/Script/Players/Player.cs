@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Windows;
 
 // 플레이어 클래스 
 public class Player : MonoBehaviour
@@ -12,6 +13,13 @@ public class Player : MonoBehaviour
     public PlayerJumpState jumpState { get; private set; }
     public PlayerGroundedState groundedState { get; private set; }
 
+    //약공 z 키 
+    public PlayerZattackState zattackState { get; private set; }
+
+    // 추락상황 
+    public PlayerFallState fallState { get; private set; }  
+
+    public PlayerDashState dashState { get; private set; }
 
     #region 조건처리 
     [SerializeField] private bool isGrounded = false;
@@ -29,7 +37,12 @@ public class Player : MonoBehaviour
     [Tooltip("바닥 체크 거리")]
     [SerializeField] private float groundCheckDistance;
 
-    public SpriteRenderer Sprite { get { return sprite; } }
+    [Tooltip("추락 상태 체크 -> Rb.Y와 Flaot 값 이용 -> Parameter name : Fall")]
+    [SerializeField] private float fallingFloat;
+
+    public float FallingFloat { get { return fallingFloat;} set { fallingFloat = value; } }
+    
+    public SpriteRenderer Sprite { get { return sprite; } set { sprite = value; } }
     public Animator Anim { get { return anim; } }
 
     #endregion
@@ -42,6 +55,9 @@ public class Player : MonoBehaviour
         moveState = new PlayerMoveState(Input, this, stateMachine, "Move");
         jumpState = new PlayerJumpState(Input, this, stateMachine, "Jump");
         groundedState = new PlayerGroundedState(Input, this, stateMachine, "Idle"); // Idle 에서 상태전이 시작 
+        zattackState = new PlayerZattackState(Input, this, stateMachine,"Zattack");
+        fallState = new PlayerFallState(Input, this, stateMachine, "Fall");
+        dashState = new PlayerDashState(Input, this, stateMachine, "Dash");
 
         groundCheckDistance = 1.05f;
     }
@@ -57,6 +73,8 @@ public class Player : MonoBehaviour
     {
         stateMachine.currentState.Update(); // 현재 상태머신의 업데이트 진행 
         // Player의 GroundCheck는 최상단에서 실시. 
+
+        
     }
 
     private void FixedUpdate()
@@ -64,6 +82,13 @@ public class Player : MonoBehaviour
         stateMachine.currentState.FixedUpdate();
 
         GroundCheck();
+
+        // Fall 상태 체크 fallingFalot 값 이용 -> 0 이하면 Fall 상태진입
+
+        if(!isGrounded && Input.Rb.velocity.y < 0f) // 땅이 아니고 추락중인 상황. 
+        {
+            stateMachine.ChangeState(fallState);          
+        }
     }
 
     private void LateUpdate()
@@ -86,6 +111,17 @@ public class Player : MonoBehaviour
             isGrounded = false;
             return isGrounded;
         }
+    }
+
+    // 호출 받을 함수
+    public void AnimationTrigger()
+    {
+        stateMachine.currentState.AnimationFinishTrigger();
+    }
+
+    public void ChangeDashState()
+    {
+        stateMachine.ChangeState(dashState);
     }
 
 }

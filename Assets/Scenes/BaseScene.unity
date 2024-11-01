@@ -1389,6 +1389,10 @@ PrefabInstance:
       propertyPath: inputAction.m_Name
       value: Input
       objectReference: {fileID: 0}
+    - target: {fileID: 4490305636271711556, guid: 31edf633324956d4a8d55045bd085e16, type: 3}
+      propertyPath: m_FlipX
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4908611965245510144, guid: 31edf633324956d4a8d55045bd085e16, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.73191255
@@ -1460,7 +1464,27 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7599599927345537980, guid: 31edf633324956d4a8d55045bd085e16, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1850657882}
+    - targetCorrespondingSourceObject: {fileID: 1942212465645327838, guid: 31edf633324956d4a8d55045bd085e16, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 894533432663483542}
   m_SourcePrefab: {fileID: 100100000, guid: 31edf633324956d4a8d55045bd085e16, type: 3}
+--- !u!1 &894533432663483541 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1942212465645327838, guid: 31edf633324956d4a8d55045bd085e16, type: 3}
+  m_PrefabInstance: {fileID: 894533432663483540}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &894533432663483542
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 894533432663483541}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e5968d83a395a342bf92ef28235dc04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

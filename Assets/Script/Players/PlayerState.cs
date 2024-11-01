@@ -11,9 +11,14 @@ public class PlayerState
 
     private string animBoolName;
 
+    private float animfloat; 
+
+    // 애니메이션 이벤트용 트리거 
+    protected bool triggerCalled = false;
+
     // 상태머신에 정보 전달 
     // Input이 포함된 생성자를 전달 
-    public PlayerState (PlayerInput input,  Player player , PlayerStateMachine stateMachine ,string animBoolName )
+    public PlayerState (PlayerInput input,  Player player , PlayerStateMachine stateMachine ,string animBoolName)
     {
         this.input = input; 
         this.player = player;
@@ -21,10 +26,7 @@ public class PlayerState
         this.animBoolName = animBoolName;
     }
 
-    public PlayerState()
-    {
-        
-    }
+    
 
     public virtual void Enter()
     {
@@ -55,5 +57,11 @@ public class PlayerState
         {
             player.Anim.SetBool(animBoolName, false); // 생성자에서 이미 할당됨. 
         }
+    }
+
+    // 애니메이션 종료 트리거 
+    public void AnimationFinishTrigger()
+    {
+        triggerCalled = true;
     }
 }

@@ -36,6 +36,17 @@ public class PlayerIdleState : PlayerState
             stateMachine.ChangeState(player.jumpState);
         }
 
+        //Trigger를 통해 발생한 순간에만 작동가능. 
+        // 이 방식대로 각 상태에서 인풋액션 확인가능
+        // IsPressed로 눌려있는 상태 확인 가능
+
+        if (input.actionsAsset["Dash"].triggered && (stateMachine.currentState != player.dashState))
+        {
+            Debug.Log("Player에서 Dash 관리");
+            stateMachine.ChangeState(player.dashState);
+        }
+
+
     }
 
     public override void LateUpdate()
