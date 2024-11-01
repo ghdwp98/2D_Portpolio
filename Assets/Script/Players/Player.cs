@@ -91,13 +91,6 @@ public class Player : MonoBehaviour
         stateMachine.currentState.FixedUpdate();
 
         GroundCheck();
-
-        // Fall 상태 체크 fallingFalot 값 이용 -> 0 이하면 Fall 상태진입
-
-        if(!isGrounded && Input.Rb.velocity.y < 0f) // 땅이 아니고 추락중인 상황. 
-        {
-            stateMachine.ChangeState(fallState);          
-        }
     }
 
     private void LateUpdate()

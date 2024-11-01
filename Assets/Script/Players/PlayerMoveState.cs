@@ -26,17 +26,16 @@ public class PlayerMoveState : PlayerGroundedState
     public override void Update()
     {
         base.Update();
-        PlayerMove();
-
         if (input.MoveDirection.x == 0)
         {
             stateMachine.ChangeState(player.idleState);
         }
     }
 
+
     public override void FixedUpdate()
     {
-        base.FixedUpdate();
+        base.FixedUpdate(); 
     }
 
     public override void LateUpdate()
@@ -44,12 +43,5 @@ public class PlayerMoveState : PlayerGroundedState
         base.LateUpdate();
 
     }
-
-    public void PlayerMove()
-    {
-        Vector2 moveDir = input.GetDir();
-        input.PlayerMove(moveDir);
-    }
-
 
 }

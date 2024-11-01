@@ -24,6 +24,13 @@ public class PlayerGroundedState : PlayerState
         base.Exit();
     }
 
+    public override void FixedUpdate()
+    {
+        base.FixedUpdate();
+
+        PlayerMove();
+    }
+
     public override void LateUpdate()
     {
         base.LateUpdate();
@@ -32,11 +39,6 @@ public class PlayerGroundedState : PlayerState
     public override void Update()
     {
         base.Update();
-        /*if(input.IsJumping ==true && player.IsGrounded == false)
-        {
-            stateMachine.ChangeState(player.jumpState); 
-        }
-*/
         if (input.actionsAsset["Dash"].triggered)
         {
             stateMachine.ChangeState(player.dashState);
@@ -52,6 +54,12 @@ public class PlayerGroundedState : PlayerState
         {
             stateMachine.ChangeState(player.jumpState);
         }
-
     }
+
+    public void PlayerMove()
+    {
+        Vector2 moveDir = input.GetDir();
+        input.PlayerMove(moveDir);
+    }
+
 }

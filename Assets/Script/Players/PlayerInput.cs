@@ -1,3 +1,4 @@
+using System.Security.Cryptography;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Windows;
@@ -13,9 +14,12 @@ public class PlayerInput : MonoBehaviour
 
     private Player player;
 
+    #region 플레이어 제어 변수
+
     public bool IsJumping { get; set; }
     public bool IsAttacking { get; private set; } = false;
 
+    #endregion
     public Rigidbody2D Rb { get { return rb; } set { rb = value; } }
 
     #region 인풋액션
@@ -104,6 +108,11 @@ public class PlayerInput : MonoBehaviour
     }
     private void Update()
     {
+        Debug.Log($"점프 플래그 ->{IsJumping}");
+    }
+
+    private void FixedUpdate()
+    {
         UpdatePlayer();
     }
 
@@ -123,11 +132,8 @@ public class PlayerInput : MonoBehaviour
                 player.Sprite.flipX = false;
             }
         }
-        // 점프 상태 체크 -> 땅에 닿은 경우 
-        if (rb.velocity.y <= 0f && player.IsGrounded && IsJumping == true)
-        {
-            IsJumping = false;
-        }
+        
+        
     }
 
     public Vector2 GetDir()
@@ -142,13 +148,11 @@ public class PlayerInput : MonoBehaviour
 
     private void OnFallStarted(InputAction.CallbackContext context)
     {
-        Debug.Log("OnFALLStart");
         isFallingPressed = true;
     }
 
     private void OnFallCanceled(InputAction.CallbackContext context)
     {
-        Debug.Log("OnFallEnd");
         isFallingPressed = false;
     }
 

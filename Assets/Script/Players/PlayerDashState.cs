@@ -30,6 +30,8 @@ public class PlayerDashState : PlayerState
         // 대시 중 방향을 고정시키기 때문에 Enter 에서 한 번만 방향 체크
         isFacingRight = !player.Sprite.flipX;
         Vector2 dashDir = isFacingRight ? Vector2.right : Vector2.left;
+        input.Rb.velocity = Vector2.zero; // 속도 초기화로 동일 속도 보장 
+
         if (player.IsGrounded)
         {
             input.Rb.velocity = new Vector2(dashDir.x * dashSpeed, input.Rb.velocity.y);
