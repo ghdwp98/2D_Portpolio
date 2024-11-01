@@ -54,8 +54,7 @@ public class Player : MonoBehaviour
         idleState = new PlayerIdleState(Input , this , stateMachine , "Idle");
         moveState = new PlayerMoveState(Input, this, stateMachine, "Move");
         jumpState = new PlayerJumpState(Input, this, stateMachine, "Jump");
-        groundedState = new PlayerGroundedState(Input, this, stateMachine, "Idle"); // Idle 에서 상태전이 시작 
-        zattackState = new PlayerZattackState(Input, this, stateMachine,"Zattack");
+        zattackState = new PlayerZattackState(Input, this, stateMachine,"Zattack1");
         fallState = new PlayerFallState(Input, this, stateMachine, "Fall");
         dashState = new PlayerDashState(Input, this, stateMachine, "Dash");
 
@@ -119,9 +118,6 @@ public class Player : MonoBehaviour
         stateMachine.currentState.AnimationFinishTrigger();
     }
 
-    public void ChangeDashState()
-    {
-        stateMachine.ChangeState(dashState);
-    }
+   
 
 }

@@ -57,9 +57,8 @@ public class PlayerFallState : PlayerState
             Debug.Log("¾Æ·¡ Å°");
         }
 
-        if (input.actionsAsset["Dash"].triggered && (stateMachine.currentState != player.dashState))
-        {
-            
+        if (input.actionsAsset["Dash"].triggered)
+        {      
             stateMachine.ChangeState(player.dashState);
         }
 

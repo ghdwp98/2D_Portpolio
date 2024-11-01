@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
+// 땅 위에 있는 상황들의 부모 클래스. 
 public class PlayerGroundedState : PlayerState
 {
     public PlayerGroundedState(PlayerInput input, Player player, PlayerStateMachine stateMachine, string animBoolName)
@@ -32,11 +33,11 @@ public class PlayerGroundedState : PlayerState
     public override void Update()
     {
         base.Update();
-        if(input.IsJumping ==true && player.IsGrounded == false)
+        /*if(input.IsJumping ==true && player.IsGrounded == false)
         {
             stateMachine.ChangeState(player.jumpState); 
         }
-
+*/
 
     }
 }

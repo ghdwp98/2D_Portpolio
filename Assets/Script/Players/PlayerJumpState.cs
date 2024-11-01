@@ -4,6 +4,7 @@ using UnityEngine.InputSystem;
 public class PlayerJumpState : PlayerState
 {
     // 점프 키를 누르고 들어오는 점프상황. 
+    // Ground State // Air State를 한 번 더 상속하는 방안도 생각필요. 
     public PlayerJumpState(PlayerInput input, Player player, PlayerStateMachine stateMachine, string animBoolName) : base(input, player, stateMachine, animBoolName)
     {
 
@@ -58,9 +59,8 @@ public class PlayerJumpState : PlayerState
             Debug.Log("아래 키");
         }
 
-        if (input.actionsAsset["Dash"].triggered && (stateMachine.currentState != player.dashState))
+        if (input.actionsAsset["Dash"].triggered)
         {
-            
             stateMachine.ChangeState(player.dashState);
         }
 
