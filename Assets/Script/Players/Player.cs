@@ -40,6 +40,12 @@ public class Player : MonoBehaviour
     [Tooltip("추락 상태 체크 -> Rb.Y와 Flaot 값 이용 -> Parameter name : Fall")]
     [SerializeField] private float fallingFloat;
 
+    [Tooltip("플레이어의 last공격 이후 쿨타임")]
+    private float attackCooldown = 1.3f;
+    private float attackCooldownTimer = 0f;
+
+    public bool CanAttack => attackCooldownTimer <= 0f; // 공격 가능 여부 판단
+
     public float FallingFloat { get { return fallingFloat;} set { fallingFloat = value; } }
     
     public SpriteRenderer Sprite { get { return sprite; } set { sprite = value; } }
@@ -72,6 +78,14 @@ public class Player : MonoBehaviour
     {
         stateMachine.currentState.Update(); // 현재 상태머신의 업데이트 진행 
         // Player의 GroundCheck는 최상단에서 실시. 
+
+        // 공격 쿨타임 감소 처리
+        if (attackCooldownTimer > 0)
+        {
+            attackCooldownTimer -= Time.deltaTime;
+            Debug.Log(CanAttack + "캔 어택 상태 ");
+            Debug.Log(attackCooldownTimer + "쿨다운 시간");
+        }
 
         
     }
@@ -118,6 +132,10 @@ public class Player : MonoBehaviour
         stateMachine.currentState.AnimationFinishTrigger();
     }
 
-   
+    // 외부에서 불러서 공격 쿨타운을 시작할 함수. 
+    public void StartAttackCooldown()
+    {
+        attackCooldownTimer = attackCooldown;
+    }
 
 }

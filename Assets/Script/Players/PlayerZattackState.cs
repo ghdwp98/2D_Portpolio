@@ -18,17 +18,26 @@ public class PlayerZattackState : PlayerState
 
     private bool nextComboInput = false; // 콤보 중 z키를 눌렀으면 다음 콤보로 이어져야 한다. 
 
+    private bool lastAttack = false;
+
     public override void Enter()
     {
         base.Enter();
         Debug.Log("Zattack 진입");
         comboAttackTimer = Timer;
-        comboAttackNumber = 0;
+        comboAttackNumber = 0; // 콤보 숫자 초기화 
     }
 
     public override void Exit()
     {
         base.Exit();
+
+        // 3콤보까지 모두 끝낸 후에야 공격의 쿨타임이 돌도록. 1 / 2 번째 까지는 공격 쿨타임이 없다. 
+        if(lastAttack)
+        {
+            player.StartAttackCooldown(); // 공격 쿨타임 시작
+            lastAttack = false;
+        }
         triggerCalled = false; // 다시 False로 변경
         nextComboInput = false;
 
@@ -62,7 +71,7 @@ public class PlayerZattackState : PlayerState
         // 공격의 마지막 프레임에서 다음 콤보로 이어지는 키 입력이 들어올 경우에는 연속 공격 시작 
         if (triggerCalled)
         {
-            if(comboAttackNumber >= MaxComboNumber || comboAttackTimer <=0  )
+            if(comboAttackNumber >= MaxComboNumber || comboAttackTimer <=0 || nextComboInput ==false )
             {
                 stateMachine.ChangeState(player.idleState);
                 nextComboInput = false;
@@ -81,7 +90,6 @@ public class PlayerZattackState : PlayerState
     private void PerformComboAttack()
     {
         ResetBoolParam();
-
         comboAttackNumber++;
         Debug.Log("콤보어택");
         switch(comboAttackNumber)
@@ -91,6 +99,7 @@ public class PlayerZattackState : PlayerState
                 break;
             case 2:
                 player.Anim.SetBool("Zattack3", true);
+                lastAttack = true; 
                 break;
         }
     }

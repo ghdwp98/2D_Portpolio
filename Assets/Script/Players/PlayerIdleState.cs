@@ -49,12 +49,11 @@ public class PlayerIdleState : PlayerState
         // 플레이어의 Idle 상태에서의 공격 전환 -> 일반 공격 상태 \
         // 점프 중 공격 / 대시 중 공격 등과 구분을 위해 각 상태에서 Input을 받는다. 
 
-        if(input.actionsAsset["Zattack"].triggered)
+        if(input.actionsAsset["Zattack"].triggered && player.CanAttack)
         {
             stateMachine.ChangeState(player.zattackState);
+            
         }
-
-
     }
 
     public override void LateUpdate()
